@@ -1,4 +1,4 @@
- require('dotenv').config();
+require('dotenv').config();
 var cors = require('cors')
 const express = require('express');
 const mongoose = require('mongoose');
@@ -12,22 +12,24 @@ var corsOptions = {
   origin: 'http://localhost:3000',
   optionsSuccessStatus: 200 
 }
-app.get('/', (req, res) => {
-  res.json({"현재 시간 : ":new Date().toLocaleString()})
-})
-app.get('/api/now', cors(corsOptions),(req, res) => {
-  res.json({"now":new Date().toLocaleString()})
-})
+
 mongoose
   .connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Successfully connected to mongodb'))
   .catch(e => console.error(e));
+
+app.listen(port, () => {
+  console.log({"현재 시간 : ":new Date().toLocaleString()})
+})
 app.get('/', (req, res) => {
   res.json({"현재 시간 : ":new Date().toLocaleString()})
 })
 app.get('/api/now', cors(corsOptions),(req, res) => {
   res.json({"now":new Date().toLocaleString()})
+})                                                                                                                                                           
+app.get('/', (req, res) => {
+  res.json({"현재 시간 : ":new Date().toLocaleString()})
 })
-app.listen(port, () => {
-  console.log({"현재 시간 : ":new Date().toLocaleString()})
+app.get('/api/now', cors(corsOptions),(req, res) => {
+  res.json({"now":new Date().toLocaleString()})
 })
