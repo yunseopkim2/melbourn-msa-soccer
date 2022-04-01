@@ -1,31 +1,34 @@
 import React,{useState} from "react"
+import Layout from "./components/Layout";
 
 export default function Bmi(){
-    const [name, setName] = useState("");
-    const [height, setHeight] = useState(0);
-    const [weight, setWeight] = useState(0);
-    const execute = () => {
-        let name = document.getElementById('name').value
-        console.log('이름 : ' + name)
-        let height = document.getElementById('height').value
-        console.log('키 : ' + height)
-        let weight = document.getElementById('weight').value
-        console.log('몸무게 : ' + weight)
-        setName(name)
-        setHeight(height)    
-        setWeight(weight)
+ 
+    const [inputs, setInputs] = useState({})
+     const {name, weight, height} = inputs;
+    
+    const handleChange = e =>{
+        e.preventDefault()
+        const {value, name} = e.target;
+        setInputs({
+            ...inputs, [name]:value
+        })
     }
-    return <>
+    const handleClick = e => {
+        e.preventDefault()
+        const calcRequest = {name, weight, height}
+        alert(`계산: ${JSON.stringify(calcRequest)}`)
+    }
+    return <Layout>
     <h1>BMI 측정기</h1>
     <div>
     <label><b>Username</b></label><br/>
-    <input id="name"/><br/>
+    <input  name="name" type="" onChange={handleChange}/><br/>
     <label><b>height(cm)</b></label><br/>
-    <input id="height"/><br/>
+    <input  name="height" type="" onChange={handleChange}/><br/>
     <label><b>weight(kg)</b></label><br/>
-    <input id="weight"/><br/>
-    <button onClick={() => {execute()}}>BMI 측정</button>
+    <input  name="weight" type="" onChange={handleChange}/><br/>
+            <button onClick={handleClick}>BMI 측정</button>
     <div>결과: {name}, {height}cm, {weight}kg</div>
     </div>
-    </>
+    </Layout>
 }

@@ -6,7 +6,8 @@ export default function Nav(){
   return (
     <nav className={styles.nav}>
              <ul>
-        <li className={styles.li}> <Link href='/user/components/login'>Login</Link> </li>
+        <li className={styles.li}> <Link href='/user/sign-up'>Login</Link> </li>
+        <li className={styles.li}> <Link href='/user/sign-in'>Sign-in</Link> </li>
               
       </ul>
     </nav>

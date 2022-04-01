@@ -6,7 +6,8 @@ export default function Nav(){
   return (
     <nav className={styles.nav}>
              <ul>
-        <li className={styles.li}> <Link href='/board/components/board-list'>게시판</Link> </li>
+        <li className={styles.li}> <Link href='/board/board-list'>BoardList</Link> </li>
+        <li className={styles.li}> <Link href='/board/board-form'>게시판</Link> </li>
     
               
       </ul>
