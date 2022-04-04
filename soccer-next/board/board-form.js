@@ -1,9 +1,10 @@
+import axios from "axios";
 import React,{useState} from "react"
 import style from '/pages/board/styles/board-form.module.css'
     
 export default function BoardhtmlhtmlForm() {
      const [inputs, setInputs] = useState({})
-    const { passengerId, name, teamId, subject } = inputs;
+   
     
     const handleChange = e => {
         e.preventDefault()
@@ -12,9 +13,10 @@ export default function BoardhtmlhtmlForm() {
     }
     const handleClick = e => {
         e.preventDefault()
-        const res = {passengerId, name, teamId, subject}
-        alert(`등록할 게시글 :  ${ JSON.stringify(res) }` )
-        
+        alert(`등록할 게시글 :  ${ JSON.stringify(inputs) }` )
+        axios.post('http://localhost:5000/api/board/write', inputs).then(res => {
+                alert(JSON.stringify(res.data))
+            }).catch(err =>alert(err))
     }
    
     return (<>

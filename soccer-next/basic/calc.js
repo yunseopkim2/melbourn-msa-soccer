@@ -1,8 +1,10 @@
-import React, {useState} from "react"
+import React, { useState } from "react"
+import axios from "axios";
+
 export default function Calc(){
     const [inputs, setInputs] = useState({})
     const [result, setResult] = useState('')
-    const {num1, num2, opcode} = inputs;
+    
     const handleChange = e =>{
         e.preventDefault()
         const {value, name} = e.target;
@@ -12,12 +14,20 @@ export default function Calc(){
     }
     const handleClick = e => {
         e.preventDefault()
-        const calcRequest = {num1, opcode, num2}
-        alert(`계산: ${JSON.stringify(calcRequest)}`)
+        
+       axios.post('http://localhost:5000/api/basic/calc', inputs).then(res => {
+            const calc = res.data
+            document.getElementById('result-span').innerHTML =`
+                <h3>숫자 : ${calc.num1} </h3>
+                <h3>연산자 : ${calc.opcode} </h3>
+                <h3>숫자 : ${calc.num2} </h3>
+                <h3>${calc.calc}</h3>`
+           
+        }).catch(err=>alert(err))
     }
     return (
         <>
-        <form>
+        <form  action="" onSubmit={handleClick}>
         <h1>Calc 폼</h1>
         <div>
             <label><b>number1</b></label>
@@ -33,7 +43,8 @@ export default function Calc(){
             <br/>
             <label><b>number2</b></label>
             <input name="num2" type="" onChange={handleChange}/><br/>
-            <button onClick={handleClick}>전송</button>
+                    <input type="submit" value="계산" /><br />
+                      <div> 결과 : <span id="result-span"></span></div>
         </div>
         </form>
         </>

@@ -16,7 +16,7 @@ module.exports = function (app) {
   });
   // next();
   app.get("/", () => { })
-  app.post("", () => { })
+  app.post("/api/board/write", () => { })
   app.update("", () => { })
   app.delate("", () => { })
   
