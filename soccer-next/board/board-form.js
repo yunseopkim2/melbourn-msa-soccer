@@ -1,11 +1,10 @@
 import axios from "axios";
 import React,{useState} from "react"
+import { applyMiddleware } from "redux";
 import style from '/pages/board/styles/board-form.module.css'
     
 export default function BoardhtmlhtmlForm() {
      const [inputs, setInputs] = useState({})
-   
-    
     const handleChange = e => {
         e.preventDefault()
         const {value, name} = e.target;
@@ -15,7 +14,7 @@ export default function BoardhtmlhtmlForm() {
         e.preventDefault()
         alert(`등록할 게시글 :  ${ JSON.stringify(inputs) }` )
         axios.post('http://localhost:5000/api/board/write', inputs).then(res => {
-                alert(JSON.stringify(res.data))
+                alert(res.data.result)
             }).catch(err =>alert(err))
     }
    

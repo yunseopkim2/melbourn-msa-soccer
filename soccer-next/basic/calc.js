@@ -3,7 +3,7 @@ import axios from "axios";
 
 export default function Calc(){
     const [inputs, setInputs] = useState({})
-    const [result, setResult] = useState('')
+    
     
     const handleChange = e =>{
         e.preventDefault()
@@ -34,7 +34,7 @@ export default function Calc(){
             <input name="num1" type="" onChange={handleChange}/><br/>
             <label><b>opcode</b></label>
             <select name="opcode" onChange={handleChange}>
-                <option value="+">+</option>
+                <option value="+" selected>+</option>
                 <option value="-">-</option>
                 <option value="*">*</option>
                 <option value="/">/</option>

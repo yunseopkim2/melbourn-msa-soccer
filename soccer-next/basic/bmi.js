@@ -3,7 +3,7 @@ import React,{useState} from "react"
 import Layout from "./components/Layout";
 
 export default function Bmi(){
- 
+    const proxy = 'http://localhost:5000/'
     const [inputs, setInputs] = useState({})
     
     
@@ -17,7 +17,7 @@ export default function Bmi(){
     const handleClick = e => {
         e.preventDefault()
     
-        axios.post('http://localhost:5000/api/basic/bmi', inputs).then(res => {
+        axios.post(proxy+'/api/basic/bmi', inputs).then(res => {
             const bmi = res.data
             document.getElementById('result-span').innerHTML =`
                 <h3>이름 : ${bmi.name} </h3>
