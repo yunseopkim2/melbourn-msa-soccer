@@ -1,4 +1,8 @@
-const express = require('express');
+
+const { write } = require('../controllers/board.controller');
+module.exports = x => x.app.post(`${x.url}/write`, write) ;
+
+/**const express = require('express');
 const userLogin = express.Router()
 const usersignin = express.Router()
 userLogin.post('/api/user/write', (req, res) => {
@@ -20,4 +24,4 @@ usersignin.post('/api/signin/write', (req, res) => {
   res.json(req.body)
 })
 module.exports = userLogin;
-module.exports = usersignin;
+module.exports = usersignin;*/

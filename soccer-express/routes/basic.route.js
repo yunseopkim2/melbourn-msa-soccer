@@ -1,8 +1,8 @@
-const express = require('express');
-const basicRouter = express.Router();
+const { getBmi, getCalc, getGrade } = require('../controllers/basic.controller');
+module.exports = x => x.app.post(`${x.url}/bmi`, getBmi);
 
-basicRouter.use(function log(req, res, next) {
-    console.log('### 관리자 서버 ###')
-    next();
-})
-module.exports = basicRouter;
+
+module.exports = x => x.app.post(`${x.url}/calc`, getCalc);
+
+
+module.exports = x => x.app.post(`${x.url}/grade`, getGrade) ;

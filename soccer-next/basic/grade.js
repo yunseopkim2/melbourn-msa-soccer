@@ -34,7 +34,7 @@ export default function Grade() {
     <label><b>math</b></label>
     <input id="math" name="math" onChange={handleChange}/><br/>
      <input type="submit" value="계산" /><br />
-                      <div> 결과 : <span id="result-span"></span></div>
+                      <div> <span id="result-span"></span></div>
             </div>
             </form>
     </>

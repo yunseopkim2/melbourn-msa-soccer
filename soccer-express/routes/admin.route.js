@@ -1,8 +1,2 @@
-const express = require('express');
-const adminRouter = express.Router();
-
-adminRouter.use((req, res, next) => { 
-    console.log('###  ###')
-    next();
-})
-module.exports = adminRouter;
+const { write } = require('../controllers/board.controller');
+module.exports = x => x.app.post(`${x.url}/write`, write) ;
