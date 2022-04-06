@@ -1,6 +1,6 @@
 
-const { write } = require('../controllers/board.controller');
-module.exports = x => x.app.post(`${x.url}/write`, write) ;
+const { signup } = require('../controllers/user.controller');
+module.exports = x => x.app.post(`${x.url}/signup`, signup) ;
 
 /**const express = require('express');
 const userLogin = express.Router()

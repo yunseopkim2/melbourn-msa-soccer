@@ -11,7 +11,7 @@ export default function Singup() {
     }
     const handleSubmit = e => {
         e.preventDefault()
-        axios.post('http://localhost:5000/api/user/write', inputs).then(res => {
+        axios.post('http://localhost:5000/api/user/signup', inputs).then(res => {
             const result = res.data
             document.getElementById('result-span').innerHTML=`
             <h3>${result.name}님의 회원가입을 축하드립니다.</h3>
