@@ -11,3 +11,13 @@ exports.signup = (req, res) => {
     })
     
 }
+exports.userlist = (req, res) => {
+    console.log(`### userController access `)
+    UserSchema.find()
+    .exec((err, users) => {
+        if (err) return res.status(400).send(err)
+        res.status(200).json({ success: true, users })
+    })
+ 
+    
+}

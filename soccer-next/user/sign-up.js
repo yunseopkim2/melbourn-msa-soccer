@@ -24,7 +24,7 @@ export default function Singup() {
         <form  action="" onSubmit={handleSubmit}>
      <div>
      <label><b>사용자 ID</b></label><br/>
-     <input name="username" onChange={handleChange} placeholder="사용자 ID"/><br/>
+                <input name="username" onChange={handleChange} placeholder="사용자 ID" /><br />
      <label><b>비밀번호</b></label><br/>
             <input name="pw" onChange={handleChange} placeholder="비밀번호" /><br />
               <label><b>이름</b></label><br/>

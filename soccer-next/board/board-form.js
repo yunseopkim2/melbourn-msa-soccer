@@ -14,14 +14,18 @@ export default function BoardhtmlhtmlForm() {
         e.preventDefault()
         alert(`등록할 게시글 :  ${ JSON.stringify(inputs) }` )
         axios.post('http://localhost:5000/api/board/write', inputs).then(res => {
-                alert(`결과 : ${res.data.result}`)
+                const result = res.data
+            document.getElementById('result-span').innerHTML=`
+            <h3>${result.name}님의 회원가입을 축하드립니다.</h3>
+            `
             }).catch(err =>alert(err))
     }
    
     return (<>
         <h1>게시물 등록</h1>
+        <form  action="" onSubmit={handleClick}>
         <div className={style.container}>
-            <htmlForm action="">
+            
             <div className={style.row}>
                 <div className={style.col25}>
                 <label className={style.label} htmlFor="passengerId">PassengerId</label>
@@ -63,11 +67,12 @@ export default function BoardhtmlhtmlForm() {
             </div>
             <br/>
             <div className={style.row}>
-                    <input type="submit" className={style.inputSubmit}
-                        value="Submit" onClick={handleClick} />
+                        <input className={style.inputsubmit} type="submit" value="로그인" /><br />
+                 <div> <span id='result-span'></span></div>
                 </div>
         
-            </htmlForm>
+        
             </div>
+            </form>
     </>)
 }
