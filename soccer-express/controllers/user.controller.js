@@ -1,23 +1,26 @@
 const db = require('../models/index')
 const UserSchema = db.user
 exports.signup = (req, res) => {
-    new UserSchema({
-        username: req.body.username, 
-        pw: req.body.pw, 
-        name: req.body.name, 
-        telephone: req.body.telephone
-    }).save(()=>{
+    new UserSchema(req.body).save(()=>{
         res.status(200).json({'result':'ok'}) 
     })
     
 }
 exports.userlist = (req, res) => {
-    console.log(`### userController access `)
+    
     UserSchema.find()
     .exec((err, users) => {
         if (err) return res.status(400).send(err)
         res.status(200).json({ success: true, users })
     })
- 
+    
+}
+exports.profile = (req, res) => {
+    console.log(`### user profile access `)
+    UserSchema.find({username: req.params.id})
+    .exec((err, user) => {
+        if (err) return res.status(400).send(err)
+        res.status(200).json({ success: true, user })
+    })
     
 }

@@ -1,6 +1,5 @@
 import axios from "axios";
 import React,{useState} from "react"
-import { applyMiddleware } from "redux";
 import style from '/pages/board/styles/board-form.module.css'
     
 export default function BoardhtmlhtmlForm() {

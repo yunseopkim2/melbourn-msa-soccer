@@ -1,48 +1,55 @@
-import styled from '/pages/common/styles/table.module.css'
-import { useState, useEffect } from 'react';
 import axios from 'axios';
-const Table = ({ columns, colSpan, data }) => {
+import { useEffect, useState } from 'react';
+import tableStyles from '../common/styles/table.module.css'
+import Link from 'next/link'
+const Table = ({ columns, colspan, data}) => {
     return (
-        <table className={styled.table}>
-            <thead>
-                <tr className={styled.tr}>
-                    {columns.map((column) => (
-                        <th key={column.username} className={styled.td}>{column}</th>
-                    ))}
+      <table className={tableStyles.table}>
+        <thead>
+            <tr className={tableStyles.tr}  >
+            {columns.map((column, index) => (
+                  <th className={tableStyles.td} key={index}>{column}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+                { data.length == 0  ?<tr className={tableStyles.tr}>
+                                      <td colSpan={colspan} className={tableStyles.td}>데이터가 없습니다</td>
+                                      </tr>
+                :data.map((user) => (
+                <tr className={tableStyles.tr}  key={user.username} >
+                  <td className={tableStyles.td}>
+                    <Link href={{pathname:`/user/[username]`,
+                                query:{selectedUser: 'test'}}} as={`/user/${user.username}`}>
+                      <a>{user.username}</a>
+                    </Link>
+                    
+                  </td>
+                  <td className={tableStyles.td}>{user.pw}</td>
+                  <td className={tableStyles.td}>{user.name}</td>
+                  <td className={tableStyles.td}>{user.telephone}</td>
                 </tr>
-            </thead>
-            <tbody>
-                
-                    {data.length == 0 ?<td colSpan={colSpan} className={styled.td}>데이터가 없습니다</td>
-                        : data.map((user)=>(
-                    <tr className={styled.tr} key={user.username}>
-                        <td className={styled.td}>{ user.username}</td>
-                        <td className={styled.td}>{ user.pw}</td>
-                        <td className={styled.td}>{ user.name}</td>
-                        <td className={styled.td}>{ user.telephone}</td>
-                    </tr>
-    ))}
-                
-            </tbody>
-        </table>
+            ))}
+            
+        </tbody>
+      </table>
     );
-    }
-export default function Userlist(){
-    const columns = ['username', 'pw', 'name', 'telephone'];
-    const [data, setData] = useState([]);
-    const count = data.length;  
-    useEffect(() => {
-        axios.get('http://localhost:5000/api/user/list').then(res => {
-            setData(res.data.users)
-        }).catch(err => {})
-    }, []);
-    return (
-        <>
-            <h1>사용자 목록</h1>
-            {count != 0 && <h3>회원수 : {count}명 </h3>}
-            <div className={styled.td}>
-                <Table columns={columns} colSpan={4} data={data}/>
-            </div>
-        </>
-    )
+  }
+  
+export default function UserList(){
+
+    const columns = ["Username", "Password", "Name", "Telephone"];
+    const [data, setData] = useState([])
+    useEffect(()=>{
+      axios.get('http://localhost:5000/api/user/list').then(res=>{
+        setData(res.data.users)
+      }).catch(err=>{})
+    },[])
+    return(<>
+        <h1>사용자 목록</h1>  
+        
+        <div className={tableStyles.td}>
+        <Table columns={columns} colspan={4} data={data}/>
+        </div>
+        </>)
 }
